@@ -33,6 +33,24 @@ router.delete('/:id', function(req, res, next) {
 });
 
 
+
+router.get('/:id', function(req, res, next) {
+    console.log('Get Request ' + req.params.id);
+
+    Product.findById({_id : req.params.id }).then(function(product) {
+        console.log('Product ', product);
+       
+        if(!product) {
+            console.log('Product is not present in the DB');
+            const error = new Error('Missing Product')
+            error.httpStatusCode = 404;
+            return next(error);
+        }
+        
+        res.status(200).send(product);
+    })
+});
+
 router.put('/:id', function(req, res, next) {
     console.log('Update Request ' + req.params.id, req.body);
 

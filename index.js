@@ -34,6 +34,13 @@ app.use(function(request, response, next) {
 // Router Configurations
 app.use('/api/products', productRouter);
 
+app.use((err, req, res, next) => {
+    console.log('Error handling request ', req.url);
+    console.log('Error occured', err);
+
+    res.send(err.message)
+});
+
 app.listen(3000, function() {
     console.log('Server started at http://localhost:3000/');
 });

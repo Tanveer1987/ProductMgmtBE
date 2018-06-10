@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const productRouter = require('./routers/product_routes');
+const categoryRouter = require('./routers/category_routes');
 const app = express();
 
 // Mongo DB Connection
@@ -33,6 +34,7 @@ app.use(function(request, response, next) {
 
 // Router Configurations
 app.use('/api/products', productRouter);
+app.use('/api/categories', categoryRouter);
 
 app.use((err, req, res, next) => {
     console.log('Error handling request ', req.url);
